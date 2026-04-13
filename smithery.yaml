@@ -1,0 +1,28 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      PAPER_MCP_STORAGE:
+        type: string
+        description: "Storage path for downloaded papers"
+        default: "~/.paper-mcp/papers"
+      CORE_API_KEY:
+        type: string
+        description: "CORE API key (optional)"
+      UNPAYWALL_EMAIL:
+        type: string
+        description: "Unpaywall email for polite pool (optional)"
+      GOOGLE_SCHOLAR_PROXY_URL:
+        type: string
+        description: "Google Scholar proxy URL (optional)"
+  commandFunction: |
+    (config) => ({
+      command: "paper-mcp",
+      env: {
+        PAPER_MCP_STORAGE: config.PAPER_MCP_STORAGE || "",
+        PAPER_SEARCH_MCP_CORE_API_KEY: config.CORE_API_KEY || "",
+        PAPER_SEARCH_MCP_UNPAYWALL_EMAIL: config.UNPAYWALL_EMAIL || "",
+        PAPER_SEARCH_MCP_GOOGLE_SCHOLAR_PROXY_URL: config.GOOGLE_SCHOLAR_PROXY_URL || "",
+      }
+    })

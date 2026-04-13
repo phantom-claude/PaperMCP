@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "paper-mcp"
+version = "0.2.0"
+description = "All-in-one academic paper MCP server — 30+ sources including ArXiv, PubMed, Semantic Scholar, CrossRef, OpenAlex, Google Scholar, DBLP, IACR, CORE, SSRN, and more"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "PaperMCP Contributors" }
+]
+dependencies = [
+    "mcp>=1.2.0",
+    "httpx[socks]>=0.24.0",
+    "requests>=2.31.0",
+    "arxiv>=2.1.0",
+    "beautifulsoup4>=4.12.0",
+    "scholarly>=1.7.0",
+    "openreview-py>=0.28.0",
+    "pydantic>=2.0.0",
+    "PyPDF2>=3.0.0",
+    "pymupdf4llm>=0.0.17",
+    "aiofiles>=23.2.1",
+    "feedparser>=6.0.0",
+    "lxml>=4.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-timeout>=2.2.0",
+]
+
+[project.scripts]
+paper-mcp = "paper_mcp:main"
+paper-search = "paper_mcp.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/paper_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
